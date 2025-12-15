@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Golden House: live fire tasting menus, craft cocktails, and intimate dining in Bucharest." />
+  <title>Golden House - Signature Restaurant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #0f151a;
+      --wine: #7a1126;
+      --amber: #f79a3e;
+      --gold: #f2c46d;
+      --cream: #f7f1e8;
+      --muted: #d9cfc0;
+      --bg-hero: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1600&q=75');
+      --bg-menu: url('https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=1200&q=75');
+      --bg-story: url('https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=1200&q=75');
+      --bg-experience: url('https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=1200&q=75');
+      --bg-booking: url('https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=1200&q=75');
+      --bg-contact: url('https://images.unsplash.com/photo-1544145945-f90425340c7b?auto=format&fit=crop&w=1200&q=75');
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: linear-gradient(145deg, rgba(10,15,20,0.9), rgba(12,17,23,0.92));
+      background-position: center;
+      color: var(--cream); font-family: 'Space Grotesk', system-ui, sans-serif; line-height: 1.6;
+      min-height: 100vh; overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+    .shell { max-width: 1180px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+    header {
+      position: sticky; top: 0; z-index: 10; backdrop-filter: blur(14px);
+      background: transparent;
+      border-bottom: 1px solid rgba(242,196,109,0.04);
+    }
+    .topbar {
+      position: relative; display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 12px 0;
+      isolation: isolate;
+    }
+    .topbar::before {
+      content: none;
+    }
+    .topbar::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(242,196,109,0.35), rgba(247,154,62,0.4), transparent);
+      opacity: 0.9; pointer-events: none;
+    }
+    .topbar > * { position: relative; z-index: 1; }
+    .logo { display: inline-flex; align-items: center; gap: 10px; font-family: 'Playfair Display', serif; font-size: 22px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); text-decoration: none; padding: 8px 12px; border-radius: 12px; }
+    .logo-img { height: 70px; width: auto; display: block; object-fit: contain; filter: drop-shadow(0 6px 12px rgba(0,0,0,0.32)); }
+    .brand-text { display: flex; flex-direction: column; gap: 4px; }
+    .brand-wordmark { font-family: 'Playfair Display', serif; font-size: 22px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
+    .brand-sub { color: var(--muted); font-size: 12px; letter-spacing: 0.04em; }
+    .nav-wrap { display: flex; align-items: center; gap: 12px; }
+    .hero-inner { display: grid; grid-template-columns: minmax(340px, 1.1fr) minmax(300px, 0.9fr); gap: 26px; align-items: center; }
+    .hero-card { background: linear-gradient(145deg, rgba(12,17,23,0.88), rgba(14,20,26,0.8)); border: 1px solid rgba(242,196,109,0.16); border-radius: 18px; box-shadow: 0 18px 32px rgba(0,0,0,0.24); }
+    .card-brand { display: flex; align-items: center; gap: 12px; padding: 10px 12px 4px; margin-bottom: 6px; border-bottom: 1px solid rgba(242,196,109,0.12); }
+    .meta-line { color: var(--muted); font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 14px; }
+    .nav-flyout {
+      display: flex; align-items: center; gap: 18px; padding: 10px 0;
+      border-radius: 14px; border: none;
+      background: transparent;
+      box-shadow: none;
+      backdrop-filter: none;
+      flex-wrap: nowrap;
+      position: relative;
+    }
+    nav { display: flex; gap: 20px; align-items: center; }
+    nav a {
+      position: relative; padding: 8px 6px; font-size: 13px; transition: 180ms ease; color: var(--muted); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.9;
+    }
+    nav a::after {
+      content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: 2px; background: linear-gradient(135deg, var(--gold), var(--amber)); border-radius: 999px; transform: scaleX(0); transform-origin: left; transition: transform 160ms ease;
+    }
+    nav a:hover, nav a.active { color: var(--gold); opacity: 1; }
+    nav a:hover::after, nav a.active::after { transform: scaleX(1); }
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
+    .nav-call {
+      display: inline-flex; align-items: center; justify-content: center; min-height: 38px;
+      padding: 0 12px; border-radius: 10px; border: 1px solid rgba(242,196,109,0.24); color: var(--gold); font-weight: 700; letter-spacing: 0.08em; background: rgba(242,196,109,0.08); box-shadow: none;
+    }
+    .nav-cta { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; padding: 0 16px; border-radius: 999px; border: 1px solid rgba(242,196,109,0.6); background: linear-gradient(135deg, rgba(242,196,109,0.95), rgba(247,154,62,0.95)); color: var(--ink); font-weight: 800; letter-spacing: 0.08em; box-shadow: 0 10px 24px rgba(0,0,0,0.25); text-transform: uppercase; }
+    .nav-cta:hover { transform: translateY(-1px); }
+    .nav-toggle {
+      display: none; background: rgba(255,255,255,0.06); color: var(--cream); border: 1px solid rgba(242,196,109,0.3);
+      padding: 10px 12px; border-radius: 12px; font-weight: 700; letter-spacing: 0.05em;
+    }
+    .pill { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; background: rgba(247,154,62,0.12); border: 1px solid rgba(242,196,109,0.25); border-radius: 999px; font-size: 13px; color: var(--muted); }
+    .hero {
+      position: relative; padding: 86px 0 72px; overflow: hidden;
+      background: linear-gradient(135deg, rgba(10,15,20,0.76), rgba(12,17,23,0.7)), var(--bg-hero);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border-radius: 22px;
+      margin: 20px 12px 0;
+      border: none;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.28), inset 0 0 30px rgba(0,0,0,0.24);
+      -webkit-mask-image: radial-gradient(140% 180% at 50% 50%, rgba(0,0,0,1) 64%, rgba(0,0,0,0) 100%);
+      mask-image: radial-gradient(140% 180% at 50% 50%, rgba(0,0,0,1) 64%, rgba(0,0,0,0) 100%);
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+    }
+    .hero::before {
+      content: ""; position: absolute; inset: 0;
+      background:
+        linear-gradient(180deg, rgba(10,12,14,0.58) 0%, rgba(10,12,14,0.36) 38%, rgba(10,12,14,0.2) 100%),
+        linear-gradient(110deg, rgba(10,12,14,0.38) 0%, rgba(10,12,14,0.3) 40%, rgba(10,12,14,0.18) 100%);
+      pointer-events: none; z-index: 0;
+    }
+    .hero > * { position: relative; z-index: 1; }
+    .grid { display: grid; gap: 24px; }
+    .two { grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); align-items: center; }
+    h1 { font-family: 'Playfair Display', serif; font-size: clamp(36px, 6vw, 62px); margin: 0 0 12px; line-height: 1.05; }
+    h2 { font-family: 'Playfair Display', serif; font-size: clamp(28px, 4vw, 36px); margin: 0 0 14px; }
+    h3 { margin: 0 0 8px; font-size: 18px; }
+    .lede { max-width: 640px; color: var(--muted); margin-bottom: 22px; }
+    .cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px; padding: 14px 18px; border-radius: 14px;
+      border: 1px solid rgba(242,196,109,0.4); color: var(--ink); font-weight: 600; letter-spacing: 0.02em;
+      background: linear-gradient(135deg, var(--gold), var(--amber)); box-shadow: 0 14px 30px rgba(0,0,0,0.2);
+      transition: transform 160ms ease, box-shadow 160ms ease;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 18px 36px rgba(0,0,0,0.28); }
+    .ghost { background: transparent; color: var(--cream); border-color: rgba(242,196,109,0.3); }
+    .card {
+      background: linear-gradient(145deg, rgba(12,17,23,0.88), rgba(14,20,26,0.8)); border: 1px solid rgba(242,196,109,0.16); border-radius: 18px; padding: 20px;
+      box-shadow: 0 18px 32px rgba(0,0,0,0.24);
+    }
+    .badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 12px; background: rgba(247,154,62,0.14); color: var(--gold); font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; }
+    .menu-wrap { display: grid; grid-template-columns: 1fr; gap: 18px; align-items: start; }
+    .menu-hero {
+      padding: 18px; border-radius: 16px; background: linear-gradient(135deg, rgba(12,17,23,0.82), rgba(14,20,26,0.74));
+      border: 1px solid rgba(242,196,109,0.14);
+      box-shadow: 0 14px 24px rgba(0,0,0,0.22);
+    }
+    .menu-hero h2 { margin-top: 6px; margin-bottom: 8px; }
+    .menu-meta { display: grid; grid-template-columns: repeat(auto-fit,minmax(140px,1fr)); gap: 10px; margin: 12px 0; }
+    .stat-card {
+      padding: 12px 12px 10px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(242,196,109,0.12);
+    }
+    .stat-card .stat-num { display: block; font-size: 20px; font-weight: 800; color: var(--gold); }
+    .stat-card .stat-label { color: var(--muted); font-size: 12px; letter-spacing: 0.04em; }
+    .menu-tiles { display: grid; grid-template-columns: repeat(auto-fit,minmax(160px,1fr)); gap: 10px; margin-top: 10px; }
+    .tile-card { padding: 12px; border-radius: 12px; border: 1px solid rgba(242,196,109,0.14); background: linear-gradient(145deg, rgba(247,154,62,0.06), rgba(242,196,109,0.05)); color: var(--cream); font-weight: 700; letter-spacing: 0.02em; }
+    .menu-panel {
+      padding: 18px; border-radius: 16px;
+      background: linear-gradient(145deg, rgba(12,17,23,0.84), rgba(14,20,26,0.76));
+      border: 1px solid rgba(242,196,109,0.16);
+      box-shadow: 0 16px 28px rgba(0,0,0,0.24);
+      backdrop-filter: blur(4px);
+    }
+    .menu-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+    .menu-filters { display: flex; gap: 8px; flex-wrap: wrap; margin: 0; }
+    .filter-btn {
+      padding: 9px 12px; border-radius: 999px; border: 1px solid rgba(242,196,109,0.22); background: rgba(255,255,255,0.03);
+      color: var(--cream); font-weight: 700; letter-spacing: 0.08em; cursor: pointer; transition: 160ms ease; text-transform: uppercase; font-size: 11px;
+    }
+    .filter-btn:hover { background: rgba(247,154,62,0.12); transform: translateY(-1px); }
+    .filter-btn.active { background: linear-gradient(135deg, var(--gold), var(--amber)); color: var(--ink); box-shadow: 0 8px 18px rgba(0,0,0,0.2); border-color: transparent; }
+    .menu-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 10px; }
+    .menu-item {
+      padding: 14px 14px 12px; border-radius: 14px; border: 1px solid rgba(242,196,109,0.16);
+      background: linear-gradient(160deg, rgba(12,17,23,0.86), rgba(14,20,26,0.78));
+      position: relative; overflow: hidden; opacity: 1; transform: translateY(0); transition: opacity 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+    }
+    .menu-item::before { content: ""; position: absolute; left: 0; top: 10px; bottom: 10px; width: 3px; border-radius: 999px; background: linear-gradient(180deg, var(--gold), var(--amber)); opacity: 0.9; }
+    .menu-item:hover { transform: translateY(-4px); box-shadow: 0 16px 28px rgba(0,0,0,0.22); }
+    .menu-item.hide { opacity: 0; transform: translateY(8px); pointer-events: none; height: 0; margin: 0; padding: 0; border: none; }
+    .menu-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+    .menu-top h3 { margin: 0; line-height: 1.25; }
+    .price { color: var(--ink); font-weight: 800; padding: 6px 10px; border-radius: 12px; background: linear-gradient(135deg, var(--gold), var(--amber)); box-shadow: 0 6px 16px rgba(0,0,0,0.18); white-space: nowrap; }
+    .tag { display: inline-block; padding: 5px 10px; border-radius: 999px; border: 1px solid rgba(247,154,62,0.25); color: var(--muted); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .menu-footer { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 8px; }
+    .note { color: var(--muted); font-size: 12px; letter-spacing: 0.04em; }
+    .section {
+      padding: 70px 0;
+      position: relative;
+      overflow: hidden;
+      margin: 26px 12px;
+      border-radius: 22px;
+      border: 1px solid rgba(242,196,109,0.05);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.32);
+    }
+    .section + .section { border-top: 1px solid rgba(242,196,109,0.06); }
+    .section::after, .hero::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: 22px;
+      background: radial-gradient(140% 180% at 50% 50%, rgba(12,17,23,0) 60%, rgba(12,17,23,0.32) 100%);
+      z-index: 1;
+    }
+    .hero > *, .section > * {
+      position: relative;
+      z-index: 2;
+    }
+    .story { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 18px; }
+    .stat { color: var(--gold); font-weight: 700; }
+    .story .stat { font-size: 26px; font-weight: 600; }
+    .gallery { display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 12px; }
+    .gallery .tile { position: relative; border-radius: 14px; overflow: hidden; min-height: 180px; background-size: cover; background-position: center; }
+    .tile::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.35)); }
+    .tile span { position: absolute; left: 12px; bottom: 12px; font-weight: 600; }
+    .quote { font-size: 15px; color: var(--muted); margin: 10px 0 14px; }
+    .features {
+      display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px;
+      margin: 20px 12px; padding: 18px;
+      border-radius: 18px; border: 1px solid rgba(242,196,109,0.1);
+      background: linear-gradient(135deg, rgba(12,17,23,0.84), rgba(14,20,26,0.76));
+      box-shadow: 0 12px 26px rgba(0,0,0,0.24);
+    }
+    .contact-section { position: relative; }
+    .contact-section::after { content: none; }
+    .contact-panel {
+      margin-top: 16px; padding: 18px; border-radius: 18px;
+      border: 1px solid rgba(242,196,109,0.14);
+      background: linear-gradient(135deg, rgba(12,17,23,0.84), rgba(14,20,26,0.76));
+      box-shadow: 0 12px 26px rgba(0,0,0,0.22);
+    }
+    .feature-card {
+      position: relative; padding: 16px 16px 14px; border-radius: 16px;
+      background: linear-gradient(145deg, rgba(12,17,23,0.86), rgba(14,20,26,0.78)); border: 1px solid rgba(242,196,109,0.16);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.24); overflow: hidden;
+      transition: transform 160ms ease, box-shadow 160ms ease;
+    }
+    .feature-card:hover { transform: translateY(-4px); box-shadow: 0 16px 30px rgba(0,0,0,0.3); }
+    .ficon { width: 28px; height: 28px; margin-bottom: 10px; }
+    .ficon.fire { background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f2c46d'><path d='M13 2s1 3-2 5c0 0 1.5-4-2.5-6 0 0-.5 3-2.5 5.5C3.5 8.8 3 10.1 3 11.5 3 16.2 6.6 20 12 20s9-3.8 9-8.5C21 5 15 4 13 2z'/></svg>") center/contain no-repeat; }
+    .ficon.spark { background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f79a3e'><path d='M12 2l1.8 5.6L19 9l-5.2 3.4L12 18l-1.8-5.6L5 9l5.2-1.4z'/><circle cx='18' cy='6' r='1.6' fill='%23f2c46d'/><circle cx='6' cy='16' r='1.4' fill='%23f2c46d'/></svg>") center/contain no-repeat; }
+    .ficon.craft { background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f2c46d'><path d='M5 4h14l-1 14-6 2-6-2z' stroke='%23f2c46d' stroke-width='1.4' fill='none'/><path d='M9 9h6M9 13h4' stroke='%23f2c46d' stroke-width='1.4' stroke-linecap='round'/></svg>") center/contain no-repeat; }
+    .testimonials { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 16px; }
+    .testimonial-card {
+      border-radius: 16px; padding: 16px; background: linear-gradient(145deg, rgba(12,17,23,0.84), rgba(14,20,26,0.76)); border: 1px solid rgba(242,196,109,0.16);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.24);
+    }
+    .testimonial-card .person { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+    .press-line { display: flex; gap: 10px; flex-wrap: wrap; margin: 12px 0; }
+    .press-pill { padding: 8px 12px; border-radius: 12px; border: 1px solid rgba(242,196,109,0.2); background: rgba(255,255,255,0.04); font-weight: 600; color: var(--cream); }
+    .faq-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 12px; margin-top: 12px; }
+    .faq-item { padding: 14px; border-radius: 14px; background: linear-gradient(145deg, rgba(12,17,23,0.84), rgba(14,20,26,0.76)); border: 1px solid rgba(242,196,109,0.14); }
+    .faq-item h4 { margin: 0 0 6px; font-size: 16px; }
+    .cta-block { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 18px; align-items: center; }
+    form { display: grid; gap: 12px; }
+    input, textarea, select {
+      width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(242,196,109,0.24);
+      background: rgba(12,17,23,0.78); color: var(--cream); font-family: inherit;
+    }
+    input:focus, textarea:focus, select:focus { outline: 1px solid var(--gold); }
+    .footer {
+      position: relative;
+      padding: 32px 0 50px; color: var(--muted); font-size: 14px;
+      display: grid; gap: 14px; background: transparent;
+      border-top: 1px solid rgba(242,196,109,0.08);
+    }
+    .footer::before {
+      content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px; pointer-events: none;
+      background: linear-gradient(90deg, transparent, rgba(242,196,109,0.5), rgba(247,154,62,0.5), transparent);
+      opacity: 0.9;
+    }
+    .footer .shell { position: relative; z-index: 1; }
+    .footer-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 18px; align-items: start; }
+    .footer-brand { display: flex; align-items: center; gap: 12px; }
+    .footer-logo-img { width: 64px; height: 64px; object-fit: contain; filter: drop-shadow(0 6px 12px rgba(0,0,0,0.32)); }
+    .footer-logo {
+      width: 42px; height: 42px; border-radius: 12px;
+      background: radial-gradient(circle at 30% 30%, rgba(247,154,62,0.2), rgba(15,21,26,0.9));
+      border: 1px solid rgba(242,196,109,0.4); display: inline-flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif; font-weight: 700; letter-spacing: 0.04em; color: var(--gold);
+    }
+    .footer-title { font-family: 'Playfair Display', serif; font-size: 20px; letter-spacing: 0.08em; color: var(--gold); text-transform: uppercase; margin: 0; }
+    .footer-links { display: grid; gap: 8px; }
+    .footer-links a { color: var(--cream); font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; font-size: 12px; }
+    .footer-links a:hover { color: var(--gold); }
+    .chips { display: flex; gap: 10px; flex-wrap: wrap; }
+    .chips .pill { background: rgba(255,255,255,0.05); }
+    .icon {
+      width: 16px; height: 16px; display: inline-block; background-size: 16px 16px; background-repeat: no-repeat;
+      filter: drop-shadow(0 0 2px rgba(0,0,0,0.25));
+    }
+    .icon-ig { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f2c46d'><rect width='18' height='18' x='3' y='3' rx='5' ry='5' stroke='%23f2c46d' stroke-width='2' fill='none'/><circle cx='12' cy='12' r='4' fill='none' stroke='%23f2c46d' stroke-width='2'/><circle cx='17.5' cy='6.5' r='1.5'/></svg>"); }
+    .icon-fb { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f2c46d'><path d='M13 10h2.5l.5-3H13V5.5c0-.9.3-1.5 1.6-1.5H16V1.2C15.4 1.1 14.2 1 13 1c-3 0-5 1.8-5 5v2.8H5v3h3v8h4v-8z'/></svg>"); }
+    .icon-ta { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f2c46d'><path d='M2 9c2.5-2 6-2 10-2s7.5 0 10 2l-2 1.5c-1.8-1-4.4-1.2-8-1.2s-6.2.2-8 1.2z'/><circle cx='8' cy='13' r='3' fill='none' stroke='%23f2c46d' stroke-width='2'/><circle cx='16' cy='13' r='3' fill='none' stroke='%23f2c46d' stroke-width='2'/><circle cx='8' cy='13' r='1.2'/><circle cx='16' cy='13' r='1.2'/><path d='M10.5 17l1.5 3 1.5-3' stroke='%23f2c46d' stroke-width='2' fill='none' stroke-linecap='round'/></svg>"); }
+    .timeline { display: grid; gap: 10px; }
+    .timeline .row { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(242,196,109,0.14); }
+    .timeline .row span:first-child { font-weight: 600; color: var(--cream); }
+    .timeline .row .tag { margin-left: auto; }
+    .dot {
+      width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center;
+      border-radius: 50%; background: rgba(247,154,62,0.16); color: var(--gold); font-weight: 700;
+    }
+    .timeline + .timeline { margin-top: 12px; }
+    button, .filter-btn { cursor: pointer; }
+    @media (max-width: 720px) {
+      header { position: static; }
+      .nav-toggle { display: inline-flex; align-items: center; }
+      .nav-wrap { position: relative; }
+      .nav-flyout {
+        display: none;
+        position: absolute; right: 12px; top: 60px; min-width: 240px;
+        flex-direction: column; gap: 12px; padding: 14px;
+        background: rgba(12,17,23,0.94); border: 1px solid rgba(242,196,109,0.24); border-radius: 14px;
+        box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+      }
+      .nav-flyout.open { display: flex; }
+      .nav-flyout nav { flex-direction: column; gap: 8px; }
+      .nav-flyout nav a { padding: 10px 0; }
+      .nav-actions { width: 100%; display: flex; flex-direction: column; gap: 10px; }
+      .nav-call, .nav-cta { width: 100%; text-align: center; justify-content: center; }
+      .hero { padding: 54px 0 60px; }
+      .hero-brand { gap: 10px; padding: 10px 12px; max-width: 100%; }
+      .hero-brand .logo-img { height: 82px; }
+      .brand-wordmark { font-size: 20px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 18px; }
+      .hero-card { order: 2; }
+      h1 { font-size: clamp(32px, 8vw, 44px); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="shell topbar">
+      <a class="logo" href="#top" aria-label="Golden House home">
+        <span class="brand-wordmark">Golden House</span>
+      </a>
+      <div class="nav-wrap">
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-flyout">Menu</button>
+        <div class="nav-flyout" id="nav-flyout">
+          <nav>
+            <a href="#menu" class="active">Menu</a>
+            <a href="#story">Story</a>
+            <a href="#experience">Experience</a>
+            <a href="#booking">Reservations</a>
+            <a href="#contact">Contact</a>
+          </nav>
+          <div class="nav-actions">
+            <a class="nav-call" href="tel:0722555111">0722 555 111</a>
+            <a class="nav-cta" href="#booking">Book</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="shell">
+        <div class="hero-inner">
+          <div>
+            <div class="pill">Author cuisine - Live fire</div>
+            <h1>Meet the flavor of Bucharest, reimagined.</h1>
+            <p class="lede">A dining room where fire, spice, and elegance meet. Seasonal tasting flights, wine pairings, and a craft cocktail bar focused on clarity and smoke.</p>
+            <div class="meta-line">Chef Mara Dumitrescu &bull; Live fire tasting &bull; 26 seats only</div>
+            <div class="cta-row">
+              <a class="btn" href="#booking">Book a table</a>
+              <a class="btn ghost" href="#menu">View menu</a>
+            </div>
+          </div>
+          <div class="card hero-card">
+            <div class="card-brand">
+              <img class="logo-img" src="logo.png" alt="Golden House logo">
+              <div class="brand-text">
+                <div class="brand-sub">Verona 12 &bull; Fire-led dining &bull; Wine bar & lounge</div>
+              </div>
+            </div>
+            <div class="badge">Signature tonight</div>
+            <div class="timeline" style="margin-top:14px;">
+              <div class="row"><span>Dorade crudo, yuzu, dill oil</span><span class="tag">new</span></div>
+              <div class="row"><span>Duck ravioli, demi-glace, gold leaf</span><span class="price">&euro;74</span></div>
+              <div class="row"><span>Beef tenderloin flambeed table-side, black truffle</span><span class="price">&euro;145</span></div>
+              <div class="row"><span>Hazelnut tart, salted caramel, miso</span><span class="price">&euro;42</span></div>
+            </div>
+            <div style="margin-top:16px; display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;">
+              <div><div class="stat" style="font-size:22px;">26 seats</div><small style="color:var(--muted)">intimate & tailored</small></div>
+              <div><div class="stat" style="font-size:22px;">4 menus</div><small style="color:var(--muted)">tasting, a la carte, vegan, bar</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="features">
+      <div class="feature-card">
+        <div class="ficon fire"></div>
+        <h3>Live fire tasting</h3>
+        <p class="quote">Open kitchen, flames on display, sauces reduced over embers.</p>
+      </div>
+      <div class="feature-card">
+        <div class="ficon spark"></div>
+        <h3>Seasonal pairings</h3>
+        <p class="quote">Natural wines and clarified cocktails curated for every course.</p>
+      </div>
+      <div class="feature-card">
+        <div class="ficon craft"></div>
+        <h3>Chef's table</h3>
+        <p class="quote">8 seats at the pass, plating in front of you, dialogue with the brigade.</p>
+      </div>
+    </div>
+
+    <section id="menu" class="section" style="background: linear-gradient(135deg, rgba(10,15,20,0.7), rgba(12,17,23,0.64)), var(--bg-menu); background-size: cover; background-position: center;">
+      <div class="shell">
+        <div class="menu-wrap">
+          <div class="menu-hero">
+            <div class="badge">Menu</div>
+            <h2>Fire-led menu with crisp acids and layered smoke.</h2>
+            <p class="lede">From raw bar to live embers to sweet finish. Select a path or mix plates; we keep it bright, charred, and balanced.</p>
+            <div class="menu-meta">
+              <div class="stat-card"><span class="stat-num">7 courses</span><span class="stat-label">Tasting flight</span></div>
+              <div class="stat-card"><span class="stat-num">&euro;240</span><span class="stat-label">Wine pairing</span></div>
+              <div class="stat-card"><span class="stat-num">&euro;140</span><span class="stat-label">Zero-proof pairing</span></div>
+            </div>
+            <div class="menu-tiles">
+              <div class="tile-card">Chef's table: 8 seats, flames in view</div>
+              <div class="tile-card">Sunday: live fire brunch</div>
+              <div class="tile-card">Vegan path available</div>
+            </div>
+          </div>
+          <div class="menu-panel">
+            <div class="menu-head">
+              <div>
+                <div class="badge">A la carte</div>
+                <p class="note">Tap a filter to reveal plates.</p>
+              </div>
+              <div class="menu-filters">
+                <button class="filter-btn active" type="button" data-filter="all">All</button>
+                <button class="filter-btn" type="button" data-filter="raw">Raw bar</button>
+                <button class="filter-btn" type="button" data-filter="signature">Signature</button>
+                <button class="filter-btn" type="button" data-filter="vegan">Vegan</button>
+                <button class="filter-btn" type="button" data-filter="grill">Grill / fire</button>
+                <button class="filter-btn" type="button" data-filter="sweet">Sweet</button>
+              </div>
+            </div>
+            <div class="menu-grid">
+              <div class="menu-item" data-cat="raw">
+                <div class="menu-top">
+                  <h3>Charcoal oyster, champagne beurre blanc</h3><span class="price">&euro;48</span>
+                </div>
+                <p class="quote">Pearled and briny, sauce mounted at the table.</p>
+                <div class="menu-footer">
+                  <span class="tag">raw bar</span>
+                  <span class="note">Cold and bright</span>
+                </div>
+              </div>
+              <div class="menu-item" data-cat="signature grill">
+                <div class="menu-top">
+                  <h3>Glazed octopus, charred green beans</h3><span class="price">&euro;94</span>
+                </div>
+                <p class="quote">Miso citrus glaze, smoked basil oil.</p>
+                <div class="menu-footer">
+                  <span class="tag">signature</span>
+                  <span class="note">Live fire glaze</span>
+                </div>
+              </div>
+              <div class="menu-item" data-cat="vegan">
+                <div class="menu-top">
+                  <h3>Hay-roasted roots, labneh, hazelnut</h3><span class="price">&euro;58</span>
+                </div>
+                <p class="quote">Textures of carrot, parsnip, beet; toasted nuts.</p>
+                <div class="menu-footer">
+                  <span class="tag">vegan</span>
+                  <span class="note">Smoked garden</span>
+                </div>
+              </div>
+              <div class="menu-item" data-cat="grill">
+                <div class="menu-top">
+                  <h3>Red prawns, bisque sauce, chili oil</h3><span class="price">&euro;89</span>
+                </div>
+                <p class="quote">Black garlic crunch, charred lime.</p>
+                <div class="menu-footer">
+                  <span class="tag">live fire</span>
+                  <span class="note">Spicy smoke</span>
+                </div>
+              </div>
+              <div class="menu-item" data-cat="signature grill">
+                <div class="menu-top">
+                  <h3>Beef tenderloin, burnt onion cream</h3><span class="price">&euro;152</span>
+                </div>
+                <p class="quote">Black truffle, reduced jus, fermented potato chip.</p>
+                <div class="menu-footer">
+                  <span class="tag">signature</span>
+                  <span class="note">Prime cut</span>
+                </div>
+              </div>
+              <div class="menu-item" data-cat="sweet">
+                <div class="menu-top">
+                  <h3>Pear tart, dark rum, tonka ice cream</h3><span class="price">&euro;45</span>
+                </div>
+                <p class="quote">Slow confit pears, salted caramel sauce.</p>
+                <div class="menu-footer">
+                  <span class="tag">pastry</span>
+                  <span class="note">Sweet finish</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="story" class="section" style="background: linear-gradient(135deg, rgba(10,15,20,0.7), rgba(12,17,23,0.64)), var(--bg-story); background-size: cover; background-position: center;">
+      <div class="shell story">
+        <div>
+          <div class="badge">Story</div>
+          <h2>Built around fire and the people who tell stories.</h2>
+          <p class="lede">Chef Mara traveled through Lisbon, Lyon, and Copenhagen. She brought back grill technique, slow fermentation, and bold desserts. Golden House means 26 seats, time for every guest, and table-side plating.</p>
+        </div>
+        <div class="card">
+          <div class="stat">2018</div>
+          <div class="quote">Opened as a culinary speakeasy in Amzei square.</div>
+          <div class="stat">+ 1400</div>
+          <div class="quote">tasting menus served, each logged in recipe notebooks.</div>
+          <div class="stat">14.7</div>
+          <div class="quote">Gault&Millau, with a special note for our sauce bar.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="section" style="background: linear-gradient(135deg, rgba(10,15,20,0.7), rgba(12,17,23,0.64)), var(--bg-experience); background-size: cover; background-position: center;">
+      <div class="shell">
+        <div class="badge">Experience</div>
+        <h2>A staged route: lounge, open kitchen, dessert bar.</h2>
+        <div class="cta-block">
+          <div class="card">
+            <h3>Your evening, hour by hour</h3>
+            <div class="timeline">
+              <div class="row"><span>17:00 - 18:30</span><span class="tag">aperitifs & raw bar</span></div>
+              <div class="row"><span>18:30 - 21:30</span><span class="tag">tasting service</span></div>
+              <div class="row"><span>21:30 - 00:30</span><span class="tag">cocktail lounge & DJ</span></div>
+              <div class="row"><span>Sunday</span><span class="tag">live fire brunch</span></div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Cocktail bar</h3>
+            <p class="quote">Cherry wood infusions, clarified milk punch with sour cherries, smoked tea highball.</p>
+            <div class="chips">
+              <span class="pill">Pairing: 5 pours</span>
+              <span class="pill">Mocktail atelier</span>
+              <span class="pill">Sommelier: Andrei B.</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:26px;" class="gallery">
+          <div class="tile" style="background-image:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=900&q=80');"><span>Live fire</span></div>
+          <div class="tile" style="background-image:url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=900&q=80');"><span>Table-side plating</span></div>
+          <div class="tile" style="background-image:url('https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=900&q=80');"><span>Natural wine</span></div>
+          <div class="tile" style="background-image:url('https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=900&q=80');"><span>Lounge</span></div>
+          <div class="tile" style="background-image:url('https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=900&q=80');"><span>Brunch</span></div>
+          <div class="tile" style="background-image:url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=900&q=80');"><span>Dessert bar</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="background: linear-gradient(135deg, rgba(10,15,20,0.7), rgba(12,17,23,0.64)), var(--bg-story); background-size: cover; background-position: center;">
+      <div class="shell">
+        <div class="badge">Reviews & Press</div>
+        <h2>Guests and critics on Golden House.</h2>
+        <div class="press-line">
+          <span class="press-pill">Gault&Millau 14.7</span>
+          <span class="press-pill">Top 10 TripAdvisor</span>
+          <span class="press-pill">Featured in Fine Dining Lovers</span>
+          <span class="press-pill">Partner wineries: Recas, Davino, Crama Delta</span>
+        </div>
+        <div class="testimonials">
+          <div class="testimonial-card">
+            <div class="person"><span class="dot">A</span><span>Ana M.</span></div>
+            <p class="quote">"The flames, the plating, the acidity balance. Best wine pairing I've had in Bucharest."</p>
+          </div>
+          <div class="testimonial-card">
+            <div class="person"><span class="dot">D</span><span>Dan I.</span></div>
+            <p class="quote">Chef's table is electric. Every course plated in front of us, with stories and humor.</p>
+          </div>
+          <div class="testimonial-card">
+            <div class="person"><span class="dot">L</span><span>Laura S.</span></div>
+            <p class="quote">Cocktails as clear as water, smoky notes, perfectly matched to the tasting menu.</p>
+          </div>
+        </div>
+        <div class="faq-grid">
+          <div class="faq-item">
+            <h4>Do you cater for allergies?</h4>
+            <p class="quote">Yes. Mention them in the booking form and we'll confirm replacements before service.</p>
+          </div>
+          <div class="faq-item">
+            <h4>Parking or ride share?</h4>
+            <p class="quote">Street parking after 18:00; we can call a car for you after dinner.</p>
+          </div>
+          <div class="faq-item">
+            <h4>Private events</h4>
+            <p class="quote">Up to 26 guests seated, custom menu and pairings, dessert bar as live station.</p>
+          </div>
+          <div class="faq-item">
+            <h4>Dress code</h4>
+            <p class="quote">Smart casual. We keep the room relaxed but elevated.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="booking" class="section" style="background: linear-gradient(135deg, rgba(10,15,20,0.7), rgba(12,17,23,0.64)), var(--bg-booking); background-size: cover; background-position: center;">
+      <div class="shell cta-block">
+        <div>
+          <div class="badge">Reservations</div>
+          <h2>Book your table. 26 seats, time dedicated to every story.</h2>
+          <p class="quote">We confirm within 2 hours. For groups over 6, we build a custom menu, pairing, and a live fire chef's table.</p>
+          <div class="chips">
+            <span class="pill">Phone: 0722 555 111</span>
+            <span class="pill">Email: reservations@goldenhouse.com</span>
+            <span class="pill">Address: Verona 12, Bucharest - Reservations: 0722 555 111 - reservations@goldenhouse.com</span>
+          </div>
+        </div>
+        <div class="card">
+          <form onsubmit="event.preventDefault(); alert('Thank you! We will confirm shortly.');">
+            <div class="grid two" style="gap:10px;">
+              <input required name="full-name" placeholder="Full name" aria-label="Full name" autocomplete="name" />
+              <input required name="phone" type="tel" placeholder="Phone" aria-label="Phone number" autocomplete="tel" inputmode="tel" />
+            </div>
+            <div class="grid two" style="gap:10px;">
+              <input required name="date" type="date" aria-label="Reservation date" />
+              <input required name="time" type="time" aria-label="Reservation time" />
+            </div>
+            <select required name="guests" aria-label="Number of guests">
+              <option value="">Number of guests</option>
+              <option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>Chef's Table (8)</option>
+            </select>
+            <textarea rows="3" name="notes" aria-label="Preferences, allergies, special occasion" placeholder="Preferences, allergies, special occasion"></textarea>
+            <button class="btn" type="submit">Send reservation</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact-section" style="background: linear-gradient(135deg, rgba(10,15,20,0.7), rgba(12,17,23,0.64)), var(--bg-contact); background-size: cover; background-position: center;">
+      <div class="shell">
+        <div class="contact-panel">
+          <div class="badge">Contact</div>
+          <h2>Open to private events and collaborations.</h2>
+          <div class="cta-block">
+            <div class="card">
+              <h3>Schedule</h3>
+              <div class="timeline">
+                <div class="row"><span>Tue - Thu</span><span>17:00 - 23:00</span></div>
+                <div class="row"><span>Fri - Sat</span><span>17:00 - 00:30</span></div>
+                <div class="row"><span>Sunday</span><span>11:00 - 16:00</span></div>
+                <div class="row"><span>Monday</span><span>closed</span></div>
+              </div>
+            </div>
+            <div class="card">
+              <h3>Newsletter</h3>
+              <p class="quote">Seasonal menus, winemaker nights, live fire brunch dates.</p>
+              <form onsubmit="event.preventDefault(); alert('You are on the list!');">
+                <input required type="email" name="newsletter-email" placeholder="Your email" aria-label="Your email" autocomplete="email" />
+                <button class="btn" type="submit">Subscribe</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="shell footer-grid">
+      <div class="footer-brand">
+        <img src="logo.png" alt="Golden House logo" class="footer-logo-img" />
+        <div>
+          <p class="footer-title">Golden House</p>
+          <p class="note" style="margin:2px 0 0;">Live fire dining - Bucharest</p>
+        </div>
+      </div>
+      <div>
+        <p class="note" style="margin:0 0 8px;">Visit us</p>
+        <div>Verona 12, Bucharest</div>
+        <div>Reservations: 0722 555 111</div>
+        <div>reservations@goldenhouse.com</div>
+      </div>
+      <div>
+        <p class="note" style="margin:0 0 8px;">Connect</p>
+        <div class="chips">
+          <span class="pill"><span class="icon icon-ig"></span> Instagram @goldenhouse</span>
+          <span class="pill"><span class="icon icon-fb"></span> Facebook /GoldenHouse</span>
+          <span class="pill"><span class="icon icon-ta"></span> TripAdvisor Top 10</span>
+        </div>
+      </div>
+      <div>
+        <p class="note" style="margin:0 0 8px;">Explore</p>
+        <div class="footer-links">
+          <a href="#menu">Menu</a>
+          <a href="#story">Story</a>
+          <a href="#experience">Experience</a>
+          <a href="#booking">Reservations</a>
+        </div>
+      </div>
+    </div>
+    <div class="shell" style="margin-top:10px; color: var(--muted); font-size: 12px;">&copy; 2024 Golden House. Crafted with live fire and attention to detail.</div>
+  </footer>
+
+  <script>
+    // nav active on scroll
+    const links = [...document.querySelectorAll('nav a')];
+    const sections = links.map(a => document.querySelector(a.getAttribute('href')));
+    const activate = () => {
+      const y = window.scrollY + 140;
+      let current = links[0];
+      sections.forEach((sec, i) => {
+        if (sec && sec.offsetTop <= y) current = links[i];
+      });
+      links.forEach(a => a.classList.toggle('active', a === current));
+    };
+    document.addEventListener('scroll', activate);
+    activate();
+
+    // menu filters
+    const filterButtons = [...document.querySelectorAll('.filter-btn')];
+    const menuItems = [...document.querySelectorAll('.menu-item')];
+    const applyFilter = (key) => {
+      menuItems.forEach(item => {
+        const cats = (item.dataset.cat || '').split(' ');
+        const show = key === 'all' || cats.includes(key);
+        item.classList.toggle('hide', !show);
+      });
+    };
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        applyFilter(btn.dataset.filter);
+      });
+    });
+
+    // mobile nav toggle
+    const navFlyout = document.getElementById('nav-flyout');
+    const toggle = document.querySelector('.nav-toggle');
+    if (toggle && navFlyout) {
+      toggle.addEventListener('click', () => {
+        const open = navFlyout.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    }
+  </script>
+</body>
+</html>
