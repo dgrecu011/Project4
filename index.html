@@ -22,6 +22,7 @@
       --bg-contact: url('https://images.unsplash.com/photo-1544145945-f90425340c7b?auto=format&fit=crop&w=1200&q=75');
     }
     * { box-sizing: border-box; }
+    img { max-width: 100%; height: auto; display: block; }
     body {
       margin: 0;
       background: linear-gradient(145deg, rgba(10,15,20,0.9), rgba(12,17,23,0.92));
@@ -33,13 +34,14 @@
     a:focus-visible, button:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
     .shell { max-width: 1180px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
     header {
-      position: sticky; top: 0; z-index: 10; backdrop-filter: blur(14px);
+      position: sticky; top: 0; z-index: 50; backdrop-filter: blur(14px);
       background: transparent;
       border-bottom: 1px solid rgba(242,196,109,0.04);
     }
     .topbar {
       position: relative; display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 12px 0;
       isolation: isolate;
+      z-index: 60;
     }
     .topbar::before {
       content: none;
@@ -68,7 +70,24 @@
       backdrop-filter: none;
       flex-wrap: nowrap;
       position: relative;
+      z-index: 200;
     }
+    .nav-overlay {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(2px); z-index: 190;
+    }
+    .to-top {
+      position: fixed; right: 18px; bottom: 18px; width: 46px; height: 46px;
+      display: inline-flex; align-items: center; justify-content: center;
+      border-radius: 50%; border: 1px solid rgba(242,196,109,0.4);
+      background: linear-gradient(135deg, rgba(242,196,109,0.95), rgba(247,154,62,0.95));
+      color: var(--ink); box-shadow: 0 10px 24px rgba(0,0,0,0.28);
+      opacity: 0; pointer-events: none; transform: translateY(10px);
+      transition: opacity 140ms ease, transform 140ms ease;
+      z-index: 210;
+    }
+    .to-top svg { width: 18px; height: 18px; }
+    .to-top.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
     nav { display: flex; gap: 20px; align-items: center; }
     nav a {
       position: relative; padding: 8px 6px; font-size: 13px; transition: 180ms ease; color: var(--muted); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.9;
@@ -293,22 +312,28 @@
     }
     .timeline + .timeline { margin-top: 12px; }
     button, .filter-btn { cursor: pointer; }
+    body.nav-open { overflow: hidden; }
+    @media (max-width: 1024px) {
+      .shell { padding: 0 18px; }
+      .topbar { gap: 12px; flex-wrap: wrap; }
+      nav { gap: 14px; }
+      .hero { margin: 16px 10px 0; padding: 74px 0 66px; }
+      .section { margin: 20px 10px; padding: 62px 0; }
+      .hero-inner { grid-template-columns: 1fr; gap: 18px; }
+      .hero-card { order: 2; }
+      .menu-wrap, .cta-block { grid-template-columns: 1fr; }
+      .menu-panel, .menu-hero, .card, .contact-panel { padding: 16px; }
+      .menu-grid { grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); }
+      .gallery { grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); }
+    }
     @media (max-width: 720px) {
       header { position: static; }
-      .nav-toggle { display: inline-flex; align-items: center; }
-      .nav-wrap { position: relative; }
-      .nav-flyout {
-        display: none;
-        position: absolute; right: 12px; top: 60px; min-width: 240px;
-        flex-direction: column; gap: 12px; padding: 14px;
-        background: rgba(12,17,23,0.94); border: 1px solid rgba(242,196,109,0.24); border-radius: 14px;
-        box-shadow: 0 12px 24px rgba(0,0,0,0.3);
-      }
-      .nav-flyout.open { display: flex; }
-      .nav-flyout nav { flex-direction: column; gap: 8px; }
-      .nav-flyout nav a { padding: 10px 0; }
-      .nav-actions { width: 100%; display: flex; flex-direction: column; gap: 10px; }
-      .nav-call, .nav-cta { width: 100%; text-align: center; justify-content: center; }
+      .shell { padding: 0 14px; }
+      .section { margin: 12px 6px; padding: 50px 0; }
+      .card, .menu-panel, .menu-hero, .contact-panel { padding: 14px; }
+      .nav-wrap { display: none; }
+      .logo { width: 100%; justify-content: center; }
+      .brand-wordmark { display: none; }
       .hero { padding: 54px 0 60px; }
       .hero-brand { gap: 10px; padding: 10px 12px; max-width: 100%; }
       .hero-brand .logo-img { height: 82px; }
@@ -316,13 +341,26 @@
       .hero-inner { grid-template-columns: 1fr; gap: 18px; }
       .hero-card { order: 2; }
       h1 { font-size: clamp(32px, 8vw, 44px); }
+      .menu-head { align-items: flex-start; }
+      .menu-grid { grid-template-columns: 1fr; }
+      .gallery .tile { min-height: 150px; }
+      .footer { padding: 28px 0 42px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 12px; }
+      .footer-brand { align-items: flex-start; gap: 10px; }
+      .footer .chips { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .footer .pill { width: 100%; justify-content: flex-start; }
+      .footer-links { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 6px; }
+      .footer .shell:last-child { text-align: left; }
+      .to-top { right: 14px; bottom: 14px; }
     }
   </style>
 </head>
 <body>
+  <div id="top"></div>
   <header>
     <div class="shell topbar">
       <a class="logo" href="#top" aria-label="Golden House home">
+        <img src="logo.png" alt="Golden House logo" class="logo-img" />
         <span class="brand-wordmark">Golden House</span>
       </a>
       <div class="nav-wrap">
@@ -340,6 +378,7 @@
             <a class="nav-cta" href="#booking">Book</a>
           </div>
         </div>
+        <div class="nav-overlay" aria-hidden="true"></div>
       </div>
     </div>
   </header>
@@ -696,6 +735,13 @@
     <div class="shell" style="margin-top:10px; color: var(--muted); font-size: 12px;">&copy; 2024 Golden House. Crafted with live fire and attention to detail.</div>
   </footer>
 
+  <button class="to-top" id="to-top" type="button" aria-label="Back to top">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 19V5"></path>
+      <polyline points="5 12 12 5 19 12"></polyline>
+    </svg>
+  </button>
+
   <script>
     // nav active on scroll
     const links = [...document.querySelectorAll('nav a')];
@@ -708,8 +754,21 @@
       });
       links.forEach(a => a.classList.toggle('active', a === current));
     };
-    document.addEventListener('scroll', activate);
+    const toTop = document.getElementById('to-top');
+    const toggleToTop = () => {
+      if (!toTop) return;
+      const show = window.scrollY > 320;
+      toTop.classList.toggle('show', show);
+    };
+    if (toTop) {
+      toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    }
+    document.addEventListener('scroll', () => {
+      activate();
+      toggleToTop();
+    });
     activate();
+    toggleToTop();
 
     // menu filters
     const filterButtons = [...document.querySelectorAll('.filter-btn')];
@@ -732,10 +791,34 @@
     // mobile nav toggle
     const navFlyout = document.getElementById('nav-flyout');
     const toggle = document.querySelector('.nav-toggle');
+    const overlay = document.querySelector('.nav-overlay');
+    const closeNav = () => {
+      navFlyout.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('nav-open');
+      if (overlay) overlay.style.display = 'none';
+      if (window.innerWidth <= 720) {
+        navFlyout.style.display = 'none';
+      }
+    };
     if (toggle && navFlyout) {
       toggle.addEventListener('click', () => {
         const open = navFlyout.classList.toggle('open');
         toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        document.body.classList.toggle('nav-open', open);
+        if (overlay) overlay.style.display = open ? 'block' : 'none';
+        if (window.innerWidth <= 720) {
+          navFlyout.style.display = open ? 'flex' : 'none';
+        }
+      });
+      navFlyout.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeNav);
+      });
+      if (overlay) overlay.addEventListener('click', closeNav);
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 720 && navFlyout.classList.contains('open')) {
+          closeNav();
+        }
       });
     }
   </script>
